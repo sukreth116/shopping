@@ -1,0 +1,15 @@
+<html>
+<body>
+<center><h1>WELCOME ADMIN</h1></center>
+<li><a href="{% url 'sellerregisterview' %}">VIEW REGISTERED SELLERS</li>
+<li><a href="{% url 'category' %}">CATEGORY</li>
+<li><a href="{% url 'logout' %}">Log Out</li>
+</body>
+{% if messages %}
+{% for msg in messages %}
+	<script>
+	alert("{{msg}}")
+	</script>
+{% endfor %}
+{% endif %}
+</html>

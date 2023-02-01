@@ -1,0 +1,42 @@
+<html>
+<body>
+	<form method="post" action="{% url 'placeOrderAction' %}" >
+	{% csrf_token %}
+	<table border>
+		<tr>
+		<th>Product name</th>
+		<th>File</th>
+		<th>Price</th>
+		<th>Details</th>
+		<th>Shipping Address</th>
+		<th>Quantity</th>
+		<th>Phone Number</th>
+		<th>Total Price</th>
+		<th>Select Item</th>
+		</tr>
+	
+		{% for v in view %}
+		<tr>
+		<td>{{v.productid.productname}}</td>
+		<td><img src="{{v.productid.file.url}}" width="100px" hieght="50px"></td>
+		<td>{{v.productid.price}}</td>
+		<td>{{v.productid.details}}</td>
+		<td>{{v.shippingaddress}}</td>
+		<td>{{v.quantity}}</td>
+		<td>{{v.phonenumber}}</td>
+		<td>{{v.totalprice}}</td>
+		<td><a href="{% url 'deletecart' v.id %}">Delete
+		<td><input type="checkbox" value="{{v.id}}" name="checkbox"></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<input type="submit" value="Place Order">
+</body>
+{% if messages %}
+{% for msg in messages %}
+	<script>
+	alert("{{msg}}")
+	</script>
+{% endfor %}
+{% endif %}
+</html>	

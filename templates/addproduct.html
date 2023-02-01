@@ -1,0 +1,113 @@
+<html>
+	<script type="text/javascript">
+	function validation()
+	{
+		var alpha=/^[A-Z a-z]+$/;
+		var num=/^[0-9]+$/;
+
+		var productname=document.getElementById('productname')
+		var file=document.getElementById('file')
+		var stock=document.getElementById('stock')
+		var price=document.getElementById('price')
+		var details=document.getElementById('details')
+		var category=document.getElementById('category')
+
+		if (productname.value.length==0)
+			{
+			alert("Enter your name")
+			return false;
+			}
+		else if(file.value.length==0)
+			{
+			alert("input picture")
+			return false;
+			}
+		else if(stock.value.length==0)
+			{
+			alert("enter stock")
+			return false;
+			}
+		else if(!stock.value.match(num))
+			{
+			alert("enter valid stock details")
+			stock.focus();
+			return false;
+			}
+		else if(price.value.length==0)
+			{
+			alert("enter price")
+			return false;
+			}
+		else if(details.value.length==0)
+			{
+			alert("enter details")
+			return false;
+			}
+		else if(category.value.length==0)
+			{
+			alert("select category")
+			return false;
+			}
+		else
+			{
+			return true;
+			}
+		}
+	</script>
+		
+	<body>
+		<form method="post" action="{% url 'addProductAction' %}" enctype="multipart/form-data" name="myform">
+		{% csrf_token %}
+		<table>
+		<tr>
+		<td>Prduct name</td>
+		<td><input type="text" name="productname" id="productname"></td>
+		</tr> 
+
+		<tr>
+		<td>File</td>
+		<td><input type="file" name="file" id="file"></td>
+		</tr>
+		
+		<tr>
+		<td>Stock</td>
+		<td><input type="text" name="stock" id="stock"></td>
+		</tr>
+
+		<tr>
+		<td>Price</td>
+		<td><input type="text" name="price" id="price"></td>
+		</tr>
+		
+		<tr>
+		<td>Details</td>
+		<td><textarea name="details" cols="21" rows="4" id="details"></textarea><td>
+		</tr>
+		
+		<tr>
+		<td>Category</td>
+		<td><select name="category" id="category">
+			<option value="">--select--</option>
+			{% for p in addproduct %}
+			
+			<option value="{{p.id}}"> {{p.name}}</option>
+			{% endfor %}
+		</select></td>
+		</tr>
+		
+		<tr>
+		<td><input type="submit" value="submit" onclick="return validation()"></td>
+		</tr>
+		</table>
+		</form>
+	</body>
+{% if messages %}
+{% for msg in messages %}
+<script>
+alert("{{msg}}")
+</script>
+{% endfor %}
+{% endif %}
+</html>
+
+		

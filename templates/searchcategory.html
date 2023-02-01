@@ -1,0 +1,54 @@
+<html>
+	<script type="text/javascript">
+	function validation()
+	{
+		var alpha=/^[A-Z a-z]+$/;
+		var num=/^[0-9]+$/;
+		
+		var category=document.getElementById('category')
+		var price=document.getElementById('price')
+		
+		if(category.value.length==0)
+			{
+			alert("select category")
+			return false;
+			}	
+		else if(price.value.length==0)
+			{
+			alert("enter a price range")
+			return false;
+			}
+		else if(!price.value.match(num))
+			{
+			alert("price field should only contain numbers")
+			price.focus()
+			return false;
+			}
+		else
+			{
+			return true;
+			}		
+	}
+	</script>
+<body>
+	<form method="post" action="{% url 'searchCategoryAction' %}" name="myform">
+	{% csrf_token %}
+	<table>	
+	<tr>
+	<td>Category</td>
+	<td><select name="category" id="category">
+		<option value="">--select--</option>
+	{% for s in ser %}
+		<option value="{{s.id}}">{{s.name}}</option>
+	{% endfor %}
+	</select></td>
+	</tr>
+	
+	<tr>
+	<td>type a price range</td>
+	<td><input type="text" name="price" id="price">  <input type="submit" value="search" onclick="return validation()"></td>
+	</tr>
+	</table>
+	</form>
+</body>
+</html>

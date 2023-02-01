@@ -1,0 +1,63 @@
+<html>
+	<body>	
+		<form method="post" action="{% url 'updateProductAction' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table>
+			{% for u in updt %}
+			<input type="hidden" name="uid" value="{{u.id}}">
+			<tr>
+			<td>Product Name</td>
+			<td><input type="text" name="productname" value="{{u.productname}}">
+			</tr>
+		
+			<tr>
+			<td>Picture</td>
+			<td><input type="file" name="file"></td>
+			<td><img src="{{u.file.url}}" height="50px" width="100px" alt="nopic"></td>
+			</tr>
+
+			<tr>
+			<td>Stock</td>
+			<td><input type="text" name="stock" value="{{u.stock}}"></td>
+			</tr> 
+			
+			<tr>
+			<td>Price</td>
+			<td><input type="text" name="price" value={{u.price}}></td>
+			</tr>
+	
+			<tr>
+			<td>Details</td>
+			<td><textarea cols="21" rows="4" name="details">{{u.details}}</textarea></td>
+			</tr>
+
+			<tr>
+			<td>Category</td>
+			<td><select name="category">
+				
+				<option value="{{u.categoryid}}">{{u.categoryid.name}}</option>
+				{% for c in cate %}
+				<option value="{{c.id}}">{{c.name}}</option>
+				{% endfor %}
+			</select></td>
+			</tr>
+
+			<tr>
+			<td><input type="submit" value="Edit"></td>
+			</tr>
+			{% endfor %}
+			</table>
+		</form>
+	</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+	

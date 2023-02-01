@@ -1,0 +1,38 @@
+<html>
+<script type="text/javascript">
+	function validation()
+	{
+		var details=document.getElementById('details')
+		
+		if(details.value.length==0)
+			{
+			alert("Enter Details")
+			return false;
+			}
+		else
+			{
+			return true;
+			}
+	}
+	
+	
+</script>	
+<body>
+	<form method="post" action="{% url 'trackingAction' %}" name="myform">
+	{% csrf_token %}
+	<table>
+	{% for t in track %}
+	<tr>
+	<input type="hidden" name="orderid" value="{{t.id}}"></td>
+	<tr>
+	<td>Details</td>
+	<td><textarea name="details" cols="21" rows="4" id="details"></textarea></td>
+	</tr>
+	<tr>
+	<td><input type="submit" value="sell" onclick="return validation()"></td>
+	</tr>
+	{% endfor %}
+	</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<body>
+	<table border>
+		<tr>
+		<th>Product name</th>
+		<th>Picture</th>
+		<th>Stock</th>
+		<th>Price</th>
+		<th>Details</th>
+		<th>Category Id</th>
+		<th>Seller</th>
+		</tr>
+	
+		{% for v in view %}
+		<tr>		
+		<td>{{v.productname}}</td>
+		<td><img src="{{v.file.url}}" height="50px" width="100px"></td>
+		<td>{{v.stock}}</td>
+		<td>{{v.price}}</td>
+		<td>{{v.details}}</td>
+		<td>{{v.categoryid.name}}</td>
+		<td>{{v.sellerid.username}}</td>
+		<td><a href="{% url 'deleteproduct' v.id%}">Delete</td>
+		<td><a href="{% url 'updateproduct' v.id%}">Update</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>

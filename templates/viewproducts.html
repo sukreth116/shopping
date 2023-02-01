@@ -1,0 +1,30 @@
+<html>
+<body>
+	<table border>
+	<tr>
+	<th>Product Name</th>
+	<th>Picture</th>
+	<th>Stock</th>
+	<th>Price</th>
+	<th>Details</th>
+	<th>Category</th>
+	<th>Seller</th>
+	<th>Buy</th>
+	</tr>
+
+	{% for v in view %}
+	<tr>
+	<td>{{v.productname}}</td>
+	<td><img src="{{v.file.url}}" height="50px" width="100px"></td>
+	<td>{{v.stock}}</td>
+	<td>{{v.price}}</td>
+	<td>{{v.details}}</td>
+	<td>{{v.categoryid.name}}</td>
+	<td>{{v.sellerid.username}}</td>
+	<td><a href="{% url 'addtocart' v.id%}">Add to cart
+	</tr>
+	{% endfor %}
+	</table>
+	<a href="{% url 'viewcart' %}">CART
+</body>
+</html>

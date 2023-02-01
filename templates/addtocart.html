@@ -1,0 +1,99 @@
+<html>
+	<script src="/static/jquery-1.8.3.min.js"></script>
+	<script>
+	
+	$(document).ready(function(){
+	$("#quantity").change(function(){
+	var quantity = parseInt($("#quantity").val());
+	var price = parseInt($("#price").val());
+	totalprice = quantity*price
+	$('#totalprice').val(totalprice)
+	})
+	})	
+	
+	</script>
+	<script type="text/javascript">
+		function validation()
+		{
+		var num=/^[0-9]+$/;		
+
+		var shippingaddress=document.getElementById('shippingaddress')
+		var quantity=document.getElementById('quantity')
+		var phonenumber=document.getElementById('phonenumber')
+		
+		if(shippingaddress.value.length==0)
+			{
+			alert("enter shipping address")
+			return false;
+			}
+		else if(quantity.value.length==0)
+			{
+			alert("enter quantity")
+			return false;
+			}
+		else if(phonenumber.value.length==0)
+			{
+			alert("enter phone number")
+			return false;
+			}
+		else if(!phonenumber.value.match(num))
+			{
+			alert("enter valid phone number")
+			phonenumber.focus()
+			return false;
+			}
+		else
+			{
+			return true;
+			}
+		}
+	</script>
+
+	<body>
+	<form method="post" action="{% url 'addToCartAction' %}" enctype="multipart/form-data" name="myform">
+	{% csrf_token %}
+	<table>
+	{% for b in buy %}
+	<input type="hidden" name="productid" value="{{b.id}}">
+	<input type="hidden" id="price" name="price" value="{{b.price}}">
+	<tr>
+	<th>Product Name</th>
+	<td>{{b.productname}}</td>
+	</tr>
+	<tr>
+	<th>Picture</th>
+	<td><img src="{{b.file.url}}" height="50px" width="100px"></td>
+	</tr>
+	<tr>
+	<th>Price</th>	
+	<td>{{b.price}}</td>
+	</tr>
+	{% endfor %}	
+
+	<tr>
+	<td>Shipping Address</td>
+	<td><textarea cols="21" rows="4" name="shippingaddress" id="shippingaddress"></textarea></td>
+	</tr>
+
+	<tr>
+	<td>Quantity</td>
+	<td><input type="number" name="quantity" id="quantity"></td>
+	</tr>
+	
+	<tr>
+	<td>Phone No.</td>
+	<td><input type="text" name="phonenumber" id="phonenumber"></td>
+	</tr>
+
+	<tr>
+	<td>Total Price</td>
+	<td><input type="text" name="totalprice" id="totalprice" readonly="true"></td>
+	</tr>
+
+	<tr>
+	<td><input type="submit" value="Add to cart" onclick="return validation()"></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

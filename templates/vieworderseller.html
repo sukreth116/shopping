@@ -1,0 +1,40 @@
+<html>
+<body>
+<table border>
+	<tr>
+	<th>Product Name</th>
+	<th>Picture</th>
+	<th>Shipping Address</th>
+	<th>Phone number</th>
+	<th>Quantity</th>
+	<th>Total price</th>
+	<th>Date</th>
+	<th>Time</th>
+	<th>Buyer</th>
+	<th>status</th>
+	</tr>
+
+	{% for v in view %}
+	<tr>
+	<td>{{v.productid.productname}}</td>
+	<td><img src="{{v.productid.file.url}}" width="100px" height="50px"></td>
+	<td>{{v.shippingaddress}}</td>
+	<td>{{v.phonenumber}}</td>
+	<td>{{v.quantity}}</td>
+	<td>{{v.totalprice}}</td>
+	<td>{{v.date}}</td>
+	<td>{{v.time}}</td>
+	<td>{{v.buyerid.username}}</td>
+	<td>{{v.status}}</td>
+	<td><a href="{% url 'approveorder' v.id %}">Approve</td>
+	<td><a href="{% url 'rejectorder' v.id %}">Reject</td>
+	{% if v.status == "approved" %}
+	<td><a href="{% url 'tracking' v.id %}">Tracking id</td>
+	{% else %}
+	<td><a href="{% url 'confirmreject' v.id %}">Confirm Reject</td>
+	{% endif %}
+	</tr>
+	{% endfor %}
+</table>
+</body>
+</html>

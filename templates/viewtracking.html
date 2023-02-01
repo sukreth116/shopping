@@ -1,0 +1,19 @@
+<html>
+<body>
+	<table border>
+		<tr>
+		<th>Date</th>
+		<th>Time</th>
+		<th>Details</th>
+		</tr>
+		
+		{% for v in view %}
+		<tr>
+		<td>{{v.date}}</td>
+		<td>{{v.time}}</td>
+		<td>{{v.details}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>

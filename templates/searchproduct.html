@@ -1,0 +1,29 @@
+<html>
+<script>
+	function validation()
+	{
+	var searchproduct=document.getElementById('searchproduct')
+	
+	if(searchproduct.value.length==0)
+		{
+		alert("enter any value")
+		return false;
+		}
+	else
+		{
+		return true;
+		}
+	}
+</script>
+<body>
+	<form method="post" action="{% url 'searchAction' %}" name="myform">
+	{% csrf_token %}
+	<table>
+		<tr>
+		<td><input type="text" name="searchproduct" id="searchproduct"> <input type="submit" value="search" onclick="return validation()"></td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>
+		

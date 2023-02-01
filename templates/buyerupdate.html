@@ -1,0 +1,71 @@
+<html>
+	<body>
+		<form method="post" action="{% url 'buyerUpdateAction' %}">
+		{% csrf_token %}
+		<table>
+			{% for v in buy %}
+		<tr>
+			<td><input type="hidden" name  ="id"  value="{{v.id}}"></td>
+		</tr>
+		<tr>
+			<td>Name</td>
+			<td><input typr="text"  name="name"  value ="{{v.name}}"></td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td><textarea name="address" cols='21' row='4'>{{v.address}}</textarea></td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			{%  if  v.gender  == "male"  %}
+			<td><input type = "radio" name = "gender"  checked = "true"  value = "male">Male
+			<input type = "radio" name = "gender"  value =  "female">Female</td>
+			{% else %}
+			<td><input type = "radio"  name = "gender"  value = "male" >Male
+			<input type = "radio"  name = "gender"  value = "female"  checked = "true">Female</td>
+			{% endif %}
+		</tr>
+		<tr>	
+			<td>DOB</td>
+			<td><input type="date" name="dob" value="{{v.dob}}"><td>
+		</tr>
+		<tr>	
+			<td>country</td>
+			<td>
+			<select name="country">
+			<option value="{{v.id}}">{{v.country}}</option>
+			<option value="india">India</option>
+			<option value="america">America</option>
+			<option value="japan">Japan</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+		<tr>
+			<td>Phone</td>
+			<td><input type="text" name="phonenumber"  value="{{v.phonenumber}}"></td>
+		</tr>
+		<tr>
+			<td>Username</td>
+			<td><input type="text"  name="username"  value="{{v.username}}"></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password"  name="password"  value="{{v.password}}"></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Edit"></td>
+		</tr>
+			{% endfor %}
+		</table>
+		</form>
+	</body>
+{% if messages %}
+{% for msg in messages %}
+<script>
+alert('{{msg}}')
+</script>
+{% endfor %}
+{% endif %}
+</html>

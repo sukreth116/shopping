@@ -1,0 +1,42 @@
+<html>
+	<script type=text/javascript>
+	function validation()
+	{
+	
+	var name=document.getElementById('name')
+	
+	if(name.value.length==0)
+		{
+		alert("Enter Category Name")
+		return false;
+		}
+	else
+		{
+		return true;
+		}
+	}
+	
+	 
+	</script>
+	<body>
+		<form method="post" action="{% url 'categoryAction' %}" name="myform">
+		{% csrf_token %}
+		<table>
+		<tr>
+		<td>Add new category here</td>
+		<td><input type="text" name="name" id="name"></td>
+		</tr>
+		<tr>
+		<td><input type="submit" value="add" onclick="return validation()"></td>
+		</tr>
+		</table>
+		</form>
+	</body>
+{% if messages %}
+{% for msg in messages %}
+<script>
+alert("{{msg}}")
+</script>
+{% endfor %}
+{% endif %}
+</html>

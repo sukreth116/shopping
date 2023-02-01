@@ -1,0 +1,36 @@
+<html>
+	<body>
+		<table border>
+			<tr>
+			<th>name</th>
+			<th>address</th>
+			<th>gender</th>
+			<th>dob</th>
+			<th>country</th>
+			<th>phone num</th>
+			<th>username</th>
+			<th>password</th>
+			<th>photo</th>
+			<th>status</th>
+			</tr>
+		
+			
+			{% for s in admin %}
+			<tr>
+			<td>{{s.name}}</td>
+			<td>{{s.address}}</td>
+			<td>{{s.gender}}</td>
+			<td>{{s.dob}}</td>
+			<td>{{s.country}}</td>
+			<td>{{s.phonenumber}}
+			<td>{{s.username}}</td>
+			<td>{{s.password}}</td>
+			<td><img src="{{s.image.url}}" height="50px" width="100px"></td>
+			<td>{{s.status}}</td>
+			<td><a href="{% url 'approved' s.id%}">approve</td>
+			</tr>	
+			{% endfor %}
+		</table>
+	</body>
+<html>
+			

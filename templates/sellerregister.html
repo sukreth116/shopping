@@ -1,0 +1,173 @@
+<html>
+	<script src="/static/jquery-1.8.3.min.js"></script>
+
+	<script>
+	$(document).ready(function(){
+	$("#username").change(function(){
+	 var username = $("#username").val();
+	$.ajax({
+		url : "{% url 'checkusername'  %}" ,
+		data : {'sid' : username},
+		success : function(data){
+		if (data.valid == "exist")
+			{
+			alert("username already exist")
+			$("#username").val();
+	}		}
+	})
+	})
+	})
+	</script>
+	<script type="text/javascript">
+
+	function validation()
+	
+	{
+	var alpha=/^[A-Z a-z]+$/;
+	var num=/^[0-9]+$/;
+
+	var name=document.getElementById('name')
+	var address=document.getElementById('address')
+	var gender=document.myform.gender;
+	var dob=document.getElementById('dob')
+	var country=document.getElementById('country')
+	var phonenumber=document.getElementById('phonenumber')
+	var username=document.getElementById('username')
+	var password=document.getElementById('password')
+	var file=document.getElementById('file')
+
+	if(name.value.length==0)
+		{
+		alert("Enter your name")
+		return false;
+		}
+	else if(!name.value.match(alpha))
+		{
+		alert("Invalid name")
+		name.focus();
+		return false;
+		}
+	else if(address.value.length==0)
+		{
+		alert("Enter Address")
+		return false;
+		}
+	else if(gender[0].checked==false && gender[1].checked==false)
+		{
+		alert("Choose gender")
+		return false;
+		}
+	else if(dob.value.length==0)
+		{
+		alert("select dob")
+		return false;
+		}
+	else if(country.value.length==0)
+		{
+		alert("select country")
+		return false;
+		}
+	else if(phonenumber.value.length==0)
+		{
+		alert("Enter phone number")
+		return false;
+		}
+	else if(!phonenumber.value.match(num))
+		{
+		alert("invalid phone number")
+		phonenumber.focus();
+		return false;
+		}
+	else if(username.value.length==0)
+		{
+		alert("enter username")
+		return false;
+		}
+	else if(password.value.length==0)
+		{
+		alert("enter password")
+		return false;
+		}
+	else if(file.value.length==0)
+		{
+		alert("Insert photo")
+		return false;
+		}
+	else
+		{
+		return true;
+		}
+	}
+	</script>
+	<body>
+		<form method="post" action="{%  url  'sellerRegisterAction'  %}"   enctype="multipart/form-data" name="myform">
+		{% csrf_token %}
+		<table>
+			<tr>
+			<td>Name</td>
+			<td><input type="text" name="name" id="name"></td>
+			</tr>
+			
+			<tr>
+			<td>Address</td>
+			<td><textarea name="address" id="address" cols="21" rows="4"></textarea></td>
+			</tr>
+			
+			<tr>
+			<td>Gender</td>
+			<td><input type="radio" name ="gender" id="gender" value="male">Male
+			<input type="radio"  name="gender" id="gender" value="female" >Female</td>
+			</tr>
+
+			<tr>
+			<td>DOB</td>
+			<td><input type="date" id="dob" name="dob"></td>
+			</tr>
+
+			<tr>
+			<td>Country</td>
+			<td><select name="country" id="country">
+			<option value="">--select--</option>
+			<option value="india">India</option>
+			<option value="america">America</option>
+			<option value="japan">Japan</option>
+			</select></td>
+			</tr>
+
+
+			<tr>
+			<td>Phone Number</td>
+			<td><input type="text" name="phonenumber" id="phonenumber"></td>
+			</tr>
+
+
+			<tr>
+			<td>Username</td>
+			<td><input type="text"  name="username" id="username" id="username"></td>
+			</tr>
+
+
+			<tr>
+			<td>Password</td>
+			<td><input type="password" name="password" id="password"></td>
+			</tr>
+			
+			<tr>
+			<td>Photo<td>
+			<td><input type="file" name="file" id="file"></td>
+			</tr>			
+			
+			<tr>
+			<td><input type="submit" value="Register" onclick="return validation()"></td>
+			</tr>
+		</table>
+		</form>
+	</body>
+	{% if messages %}
+	{% for msg in messages %}
+	<script>
+	alert("{{msg}}")
+	</script>
+	{% endfor %}
+	{% endif %}
+</html>

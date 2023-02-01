@@ -1,0 +1,47 @@
+<html>
+	<script type="text/javascript">
+	function validation()
+	{
+	var username=document.getElementById('username')
+	var password=document.getElementById('password')
+	
+	if(username.value.length==0)	
+		{
+		alert("enter username")
+		return false;
+		}
+	if(password.value.length==0)
+		{
+		alert("enter password")
+		return false;
+		}
+	else
+		{
+		return true;
+		}
+	}
+	</script>
+
+	<body>	<form method ="post"  action="{%url 'loginAction'%}" name="myform">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>Username</td>
+				<td><input type = "text"  name= "username"  id="username"></td>
+			</tr>
+
+			<tr>
+				<td>Password</td>
+				<td><input type = "password" name="password" id="password"></td> 
+				<td><a href="{% url 'forgotpassword' %}">forgot password?</td>
+			</tr>
+
+			<tr>
+				<td><input type="submit" value="Login" onclick="return validation()"></td>
+
+			</tr>
+		</table>
+		
+		</form>
+	</body>
+</html>
